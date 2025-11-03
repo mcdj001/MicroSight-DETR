@@ -1,135 +1,143 @@
-```markdown
+
 # MicroSight-DETR
 
-A lightweight real-time detection transformer with triple enhancement for UAV-based micro-object detection.
+> **Micro-object Sight-enhanced Detection Transformer**  
+> An enhanced RT-DETR for small object detection in aerial imagery
 
----
-
-## 📁 Repository Structure
+## 📁 Project Structure
 
 ```
 MicroSight-DETR/
-├── Template_for_submissions_to_Scientific_Reports.pdf
-├── guo-FangAnYi-SOEP-backbone-Pola-SEFN-Mona-DyT.yaml
-└── requirements.txt
+├── microsight_detr.yaml    # Model configuration file
+├── requirements.txt        # Python dependencies
+└── README.md              # This file
+```
+
+## 📄 File Descriptions
+
+### `microsight_detr.yaml`
+**Purpose**: Complete model architecture configuration for MicroSight-DETR
+
+**Key Components**:
+- **GEM Backbone**: Global Efficient Modeling blocks for feature extraction
+- **MAFD Encoder**: Multi-domain Adaptive Fusion Dynamics for enhanced attention
+- **SPAM Neck**: Spatial Preserving Aggregation with Multi-scale for small object optimization
+
+**Usage**: Load this configuration file when training or inferencing with Ultralytics framework.
+
+---
+
+### `requirements.txt`
+**Purpose**: Python package dependencies
+
+**Main Dependencies**:
+- PyTorch ≥ 1.8.0
+- Torchvision ≥ 0.9.0
+- Ultralytics (YOLO framework)
+- OpenCV, NumPy, Matplotlib, etc.
+
+**Installation**:
+```bash
+pip install -r requirements.txt
 ```
 
 ---
 
-## 📄 Files Description
+## 📊 Dataset
 
-### 📖 `Template_for_submissions_to_Scientific_Reports.pdf`
-**Research Paper Manuscript**
-- Complete academic paper with methodology and experimental results
-- Describes the MicroSight-DETR architecture (GEM + MAFD + SPAM modules)
-- Published version with performance analysis on VisDrone2019 dataset
-- Contains ablation studies and comparative experiments
+### VisDrone2019 Object Detection Dataset
 
-### ⚙️ `guo-FangAnYi-SOEP-backbone-Pola-SEFN-Mona-DyT.yaml`
-**Model Configuration File**
-- Defines the complete MicroSight-DETR architecture
-- Specifies three core modules:
-  - **GEM Block**: Global Efficient Modeling backbone
-  - **MAFD Module**: Multi-domain Adaptive Fusion Dynamics encoder
-  - **SPAM Module**: Spatial Preserving Aggregation with Multi-scale neck
-- Used for model instantiation and training with Ultralytics framework
-- Contains detailed comments on architecture design and parameter settings
+**Official Download Links**:
+- **GitHub Repository**: [https://github.com/VisDrone/VisDrone-Dataset](https://github.com/VisDrone/VisDrone-Dataset)
+- **Official Website**: [http://aiskyeye.com/](http://aiskyeye.com/)
+- **Direct Download** (Recommended):
+  - Training Set: [VisDrone2019-DET-train](https://drive.google.com/file/d/1a2oHjcEcwXP8oUF95qiwrqzACb2YlUhn/view?usp=sharing)
+  - Validation Set: [VisDrone2019-DET-val](https://drive.google.com/file/d/1bxK5zgLn0_L8x276eKkuYA_FzwCIjb59/view?usp=sharing)  
+  - Test-Dev Set: [VisDrone2019-DET-test-dev](https://drive.google.com/file/d/1PFdW_VFSCfZ_sTSZAGjQdifF_Xd5mf0V/view?usp=sharing)
 
-### 📦 `requirements.txt`
-**Python Dependencies**
-- Lists all required Python packages with versions:
-  - Deep learning frameworks (PyTorch, torchvision)
-  - Computer vision libraries (OpenCV, Pillow)
-  - Scientific computing tools (NumPy, SciPy, pandas)
-  - Visualization dependencies (Matplotlib, Seaborn)
-- Install via: `pip install -r requirements.txt`
+**Dataset Details**:
+- **Classes**: 10 categories (pedestrian, people, bicycle, car, van, truck, tricycle, awning-tricycle, bus, motor)
+- **Training Images**: 6,471 images
+- **Validation Images**: 548 images  
+- **Test Images**: 3,190 images
+- **Annotation Format**: YOLO format supported
 
----
-
-## 📊 Dataset: VisDrone2019
-
-### Official Download
-**Primary Source**: [VisDrone-Dataset GitHub Repository](https://github.com/VisDrone/VisDrone-Dataset)
-
-### Dataset Overview
-- **Images**: 10,209 static images captured from drone platforms
-  - Training: 6,471 images
-  - Validation: 548 images
-  - Testing: 3,190 images
-- **Categories**: 10 object classes (pedestrian, person, bicycle, car, van, truck, tricycle, awning-tricycle, bus, motor)
-- **Scenarios**: Diverse urban and suburban environments across 14 Chinese cities
-- **Annotations**: Bounding boxes in PASCAL VOC and COCO formats
-
-### Quick Setup with Ultralytics
-The dataset is pre-configured in Ultralytics YOLO:
-- Configuration file: [`VisDrone.yaml`](https://github.com/ultralytics/ultralytics/blob/main/ultralytics/cfg/datasets/VisDrone.yaml)
-- Documentation: [Ultralytics VisDrone Guide](https://docs.ultralytics.com/datasets/detect/visdrone/)
-
-### Citation
-If you use VisDrone2019 dataset, please cite:
-```bibtex
-@article{zhu2021detection,
-  title={Detection and tracking meet drones challenge},
-  author={Zhu, Pengfei and Wen, Longyin and Du, Dawei and Bian, Xiao and Fan, Heng and Hu, Qinghua and Ling, Haibin},
-  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
-  volume={44},
-  number={11},
-  pages={7380--7399},
-  year={2021},
-  publisher={IEEE}
-}
+**Dataset Structure**:
+```
+VisDrone2019-DET/
+├── train/
+│   ├── images/
+│   └── labels/
+├── val/
+│   ├── images/
+│   └── labels/
+└── test/
+    └── images/
 ```
 
 ---
 
 ## 🚀 Quick Start
 
-### 1. Environment Setup
+### 1. Install Dependencies
 ```bash
-# Create virtual environment (recommended)
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 2. Download Dataset
-Follow instructions at [VisDrone GitHub](https://github.com/VisDrone/VisDrone-Dataset) to download the dataset.
+### 2. Prepare Dataset
+Download VisDrone2019 dataset from the links above and organize according to the structure shown.
 
-### 3. Training
+### 3. Configure Dataset Path
+Create a `VisDrone.yaml` file:
+```yaml
+path: /path/to/VisDrone2019-DET
+train: train/images
+val: val/images
+test: test/images
+
+nc: 10
+names: ['pedestrian', 'people', 'bicycle', 'car', 'van', 
+        'truck', 'tricycle', 'awning-tricycle', 'bus', 'motor']
+```
+
+### 4. Train Model
 ```bash
-yolo train model=guo-FangAnYi-SOEP-backbone-Pola-SEFN-Mona-DyT.yaml \
+yolo train model=microsight_detr.yaml \
            data=VisDrone.yaml \
-           epochs=200 \
-           batch=8 \
+           epochs=100 \
+           batch=16 \
            imgsz=640 \
            device=0
 ```
 
+### 5. Inference
+```bash
+yolo predict model=path/to/best.pt \
+             source=path/to/images \
+             imgsz=640
+```
+
 ---
 
-## 📈 Performance Highlights
+## 💡 Features
 
-| Metric | Baseline RT-DETR | MicroSight-DETR | Improvement |
-|--------|------------------|-----------------|-------------|
-| mAP@0.5 | 46.7% | **51.3%** | +4.6% |
-| mAP@0.5:0.95 | 28.4% | **31.8%** | +3.4% |
-| Precision | 60.3% | **63.3%** | +3.0% |
-| Recall | 45.2% | **49.7%** | +4.5% |
-| FPS | 116 | 78 | Real-time capable |
+- ✅ **Small Object Focused**: Optimized for detecting small objects in aerial imagery
+- ✅ **High Performance**: Enhanced feature extraction and attention mechanisms
+- ✅ **Easy to Use**: Based on Ultralytics framework with simple YAML configuration
+- ✅ **Ablation Ready**: Modular design supports component-wise evaluation
 
 ---
 
 ## 📝 Citation
 
-If you use this work in your research, please cite:
+If you use MicroSight-DETR in your research, please cite:
+
 ```bibtex
-@article{guo2025microsight,
-  title={MicroSight-DETR: A Lightweight Real-time Detection Transformer with Triple Enhancement for UAV-based Logistics Monitoring},
-  author={Guo, Junhao and Jiang, Jinhao and Yang, Zijing and Zhang, Hao},
-  journal={Scientific Reports},
-  year={2025}
+@article{microsight2024,
+  title={MicroSight-DETR: Enhanced Real-Time Detection Transformer for Small Object Detection},
+  author={Your Name},
+  journal={arXiv preprint arXiv:XXXX.XXXXX},
+  year={2024}
 }
 ```
 
@@ -137,20 +145,18 @@ If you use this work in your research, please cite:
 
 ## 📧 Contact
 
-For questions or collaborations, please contact:
-- Zijing Yang: yangzijing@bigc.edu.cn
-- Hao Zhang: howzh@bigc.edu.cn
+For questions and issues, please open an issue in this repository.
 
 ---
 
-## 🙏 Acknowledgments
+## 🙏 Acknowledgements
 
-- Dataset: [VisDrone Team, Tianjin University](https://github.com/VisDrone/VisDrone-Dataset)
-- Framework: [Ultralytics YOLO](https://github.com/ultralytics/ultralytics)
-- Funding: Beijing Institute of Graphic Communication Key Teaching Reform Project (No. 22150122009)
+- [Ultralytics](https://github.com/ultralytics/ultralytics) - YOLO framework
+- [VisDrone](https://github.com/VisDrone/VisDrone-Dataset) - Dataset provider
+- [RT-DETR](https://github.com/lyuwenyu/RT-DETR) - Base architecture
 
 ---
 
 ## 📄 License
 
-This project follows the license terms specified in the original paper and dataset.
+This project is released under the AGPL-3.0 License.
