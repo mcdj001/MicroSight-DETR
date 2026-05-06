@@ -118,8 +118,8 @@ names: ['pedestrian', 'people', 'bicycle', 'car', 'van',
 ```bash
 yolo train model=microsight_detr.yaml \
            data=VisDrone.yaml \
-           epochs=100 \
-           batch=16 \
+           epochs=200 \
+           batch=8 \
            imgsz=640 \
            device=0
 ```
