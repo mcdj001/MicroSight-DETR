@@ -1,4 +1,3 @@
-
 # MicroSight-DETR
 
 > **Micro-object Sight-enhanced Detection Transformer**  
@@ -73,6 +72,21 @@ VisDrone2019-DET/
 │   └── labels/
 └── test/
     └── images/
+```
+
+---
+
+## 🏁 Pretrained Weights
+
+📥 **Download Pretrained Weights**:  
+The trained model weights (`best.pt`) are available on Google Drive:  
+👉 [Download best.pt](https://drive.google.com/file/d/13SnZDrXrcgZ4G84qtC7CLXF3HHz37Hyv/view?usp=drive_link)
+
+**Instructions**:
+1. Download the `best.pt` file from the link above.
+2. Place it in your project directory or specify the path during inference:
+```bash
+yolo predict model=best.pt source=path/to/images imgsz=640
 ```
 
 ---
