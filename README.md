@@ -91,6 +91,40 @@ yolo predict model=best.pt source=path/to/images imgsz=640
 
 ---
 
+## 🔬 Training Details & Reproducibility
+
+### Training Time (Wall-Clock)
+
+| Item | Value |
+|---|---|
+| Full 200-epoch training | ~18.5 hours |
+| Average time per epoch | ~5.5 minutes |
+| Hardware | Single NVIDIA RTX 5090 (32GB) |
+| Batch size | 8 |
+| Input resolution | 640×640 |
+
+### Dataset Preprocessing Pipeline
+
+**Training preprocessing:**
+
+| Step | Operation | Details |
+|---|---|---|
+| 1 | Image resizing | Bilinear interpolation to 640×640 pixels (maintaining aspect ratio with padding) |
+| 2 | Normalization | ImageNet statistics (mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]) |
+| 3a | Random horizontal flip | p=0.5 |
+| 3b | Mosaic augmentation | p=0.5, following YOLOv5 implementation |
+| 3c | Random HSV color jittering | hue=0.015, saturation=0.7, value=0.4 |
+| 4 | Tensor conversion | HWC→CHW format, uint8→float32 |
+| 5 | Bounding box normalization | Coordinates normalized to [0, 1] relative to image dimensions |
+
+**Validation / Inference preprocessing:** Steps 1, 2, and 4 only (no augmentation).
+
+### Statistical Evaluation Protocol
+
+All experiments were conducted across **three independent runs** with different random seeds (**42, 1897, 7538**). Mean ± standard deviation are reported for all metrics. Full details are provided in Section 4.4.1 of the manuscript.
+
+---
+
 ## 🚀 Quick Start
 
 ### 1. Install Dependencies
@@ -174,3 +208,4 @@ For questions and issues, please open an issue in this repository.
 ## 📄 License
 
 This project is released under the AGPL-3.0 License.
+```
